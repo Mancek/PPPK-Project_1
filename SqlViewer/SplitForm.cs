@@ -61,7 +61,7 @@ namespace SqlViewer
 
         private void ShowTables(OutputResult result)
         {
-            foreach (DataTable dt in result.Data)
+            foreach (DataTable dt in result.Data.Tables)
             {
                 FlpResult.Controls.Add(new DataGridView
                 {
@@ -71,6 +71,7 @@ namespace SqlViewer
                     DataSource = dt,
                     Width = FlpResult.Width - 30
                 });
+                result.Message += $"Selected {dt.Rows.Count} rows.\n\n";
             }
         }
 
@@ -82,7 +83,7 @@ namespace SqlViewer
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            CbDatabases.DataSource = new List<Database>(RepositoryFactory.GetRepository().GetDatabases());
+            LoadDatabases();
         }
     }
 }

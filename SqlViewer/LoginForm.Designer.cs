@@ -57,6 +57,7 @@ namespace SqlViewer
             this.TbServer.Name = "TbServer";
             this.TbServer.Size = new System.Drawing.Size(167, 23);
             this.TbServer.TabIndex = 1;
+            this.TbServer.Text = ".";
             // 
             // TbUserName
             // 
@@ -66,6 +67,7 @@ namespace SqlViewer
             this.TbUserName.Name = "TbUserName";
             this.TbUserName.Size = new System.Drawing.Size(167, 23);
             this.TbUserName.TabIndex = 3;
+            this.TbUserName.Text = "sa";
             // 
             // label2
             // 
@@ -85,6 +87,7 @@ namespace SqlViewer
             this.TbPassword.Name = "TbPassword";
             this.TbPassword.Size = new System.Drawing.Size(167, 23);
             this.TbPassword.TabIndex = 5;
+            this.TbPassword.Text = "SQL";
             this.TbPassword.UseSystemPasswordChar = true;
             // 
             // label3

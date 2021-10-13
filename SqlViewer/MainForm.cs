@@ -63,7 +63,7 @@ namespace SqlViewer
 
         private void ShowTables(OutputResult result)
         {
-            foreach (DataTable dt in result.Data)
+            foreach (DataTable dt in result.Data.Tables)
             {
                 FlpResult.Controls.Add(new DataGridView
                 {

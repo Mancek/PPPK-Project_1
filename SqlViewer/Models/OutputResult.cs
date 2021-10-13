@@ -10,6 +10,6 @@ namespace SqlViewer.Models
     class OutputResult
     {
         public string Message { get; set; }
-        public List<DataTable> Data { get; set; }
+        public DataSet Data { get; set; }
     }
 }

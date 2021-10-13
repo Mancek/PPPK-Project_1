@@ -91,27 +91,12 @@ namespace SqlViewer.Dal
             OutputResult output = new OutputResult
             {
                 Message = "",
-                Data = new List<DataTable>()
+                Data = new DataSet()
             };
             using (SqlDataAdapter da = new SqlDataAdapter(tbQuery, con))
             {
                 DataSet ds = new DataSet();
-                da.Fill(ds);
-                if (ds.Tables.Count > 1)
-                {
-                    foreach (DataTable dt in ds.Tables)
-                    {
-                        output.Data.Add(dt);
-                        output.Message += $"Selected {dt.Rows.Count} rows.\n\n";
-                    }
-                }
-                else
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    output.Data.Add(dt);
-                    output.Message = $"Selected {dt.Rows.Count} rows.";
-                }
+                da.Fill(output.Data);
             }
             return output;
         }
