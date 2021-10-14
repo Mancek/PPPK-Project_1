@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,7 @@ namespace SqlViewer
         }
         private void Init() => LoadDatabases();
 
-        private void LoadDatabases()
-        => CbDatabases.DataSource = new List<Database>(RepositoryFactory.GetRepository().GetDatabases());
+        private void LoadDatabases() => CbDatabases.DataSource = new List<Database>(RepositoryFactory.GetRepository().GetDatabases());
         private void SplitForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
         private void CbDatabases_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -46,7 +46,11 @@ namespace SqlViewer
 
         private void ShowResult()
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             OutputResult result = RepositoryFactory.GetRepository().ExecuteCommand(TbQuery.Text, usingDatabase.Value);
+            stopWatch.Stop();
+            result.ElapsedTime = stopWatch.Elapsed;
             if (result.Data != null)
             {
                 ShowTables(result);
@@ -56,6 +60,7 @@ namespace SqlViewer
             {
                 TcOutput.SelectedTab = TpMessage;
             }
+            result.Message += $"Completion time: {result.ElapsedTime.TotalMilliseconds} ms.";
             LbMessage.Text = result.Message;
         }
 
@@ -81,9 +86,7 @@ namespace SqlViewer
             FlpResult.Controls.Clear();
         }
 
-        private void BtnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadDatabases();
-        }
+        private void BtnRefresh_Click(object sender, EventArgs e) => LoadDatabases();
+
     }
 }

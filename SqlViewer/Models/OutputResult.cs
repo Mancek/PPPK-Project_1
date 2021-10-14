@@ -11,5 +11,6 @@ namespace SqlViewer.Models
     {
         public string Message { get; set; }
         public DataSet Data { get; set; }
+        public TimeSpan ElapsedTime { get; set; }
     }
 }
